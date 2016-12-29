@@ -42,7 +42,7 @@ public class RecommendWeiboServiceImpl implements RecommendWeiboService{
 					wlist.add(weibo);
 				}
 				//删除指定id的微博，为避免重复推荐
-				recommenddao.deleteRecommendWeiboById(id,userId);
+				recommenddao.deleteRcommendWeiboById(id,userId);
 			}			
 		}
 		//返回推荐微博的list,如果没有内容则是一个空列表
