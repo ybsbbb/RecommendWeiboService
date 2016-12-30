@@ -42,8 +42,13 @@ public class RecommendWeiboServiceImpl implements RecommendWeiboService{
 				if(weibo != null){
 					wlist.add(weibo);
 				}
+<<<<<<< HEAD
 				//É¾³ıÖ¸¶¨idµÄÎ¢²©£¬Îª±ÜÃâÖØ¸´ÍÆ¼ö
 				recommendDAO.deleteRcommendWeiboById(id,userId);
+=======
+				//åˆ é™¤æŒ‡å®šidçš„å¾®åšï¼Œä¸ºé¿å…é‡å¤æ¨è
+				recommenddao.deleteRcommendWeiboById(id,userId);
+>>>>>>> origin/master
 			}			
 		}
 		//·µ»ØÍÆ¼öÎ¢²©µÄlist,Èç¹ûÃ»ÓĞÄÚÈİÔòÊÇÒ»¸ö¿ÕÁĞ±í
