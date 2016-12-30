@@ -1,7 +1,7 @@
 /**
  * 
  */
-package cn.edu.bjtu.weibo.service.impl;
+package cn.edu.bjtu.weibo.service.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import cn.edu.bjtu.weibo.model.Weibo;
 import cn.edu.bjtu.weibo.service.RecommendWeiboService;
 
 /**
- * Î¢²©ÍÆ¼öµÄÊµÏÖÀà
+ * å¾®åšæ¨èçš„å®ç°ç±»
  * @author yangbo
  *
  */
@@ -24,29 +24,29 @@ import cn.edu.bjtu.weibo.service.RecommendWeiboService;
 public class RecommendWeiboServiceImpl implements RecommendWeiboService{
 
 	@Autowired
-	WeiboDAO weiboDAO;//DAO²ã¶ÔÏó
+	WeiboDAO weiboDAO;//DAOå±‚å¯¹è±¡
 	@Autowired
-	RecommendDAO recommendDAO;//DAO²ã¶ÔÏó
+	RecommendDAO recommendDAO;//DAOå±‚å¯¹è±¡
 	
 	public List<Weibo> getRecommentWeiboList(String userId, int pageIndex, int numberPerPage) {
-		//´ÓÊı¾İ¿âÖĞÈ¡³öÎª¸ÃÓÃ»§ÍÆ¼öµÄÇ°numberPerPageÌõÍÆ¼ö,
-		//µÚ¶ş¸ö²ÎÊıÉèÖÃÎª0ÊÇÒòÎªÃ¿´Î¶¼»á°ÑÍÆ¼ö¹ıµÄÎ¢²©´ÓÍÆ¼öÁĞ±íÉ¾È¥£¬²»ÂÛÇëÇóµ½µÚ¼¸Ò³¶¼ÊÇ´ÓµÚÒ»Ò³È¡
+		//ä»æ•°æ®åº“ä¸­å–å‡ºä¸ºè¯¥ç”¨æˆ·æ¨èçš„å‰numberPerPageæ¡æ¨è,
+		//ç¬¬äºŒä¸ªå‚æ•°è®¾ç½®ä¸º0æ˜¯å› ä¸ºæ¯æ¬¡éƒ½ä¼šæŠŠæ¨èè¿‡çš„å¾®åšä»æ¨èåˆ—è¡¨åˆ å»ï¼Œä¸è®ºè¯·æ±‚åˆ°ç¬¬å‡ é¡µéƒ½æ˜¯ä»ç¬¬ä¸€é¡µå–
 		List<String> wids = recommendDAO.getRecommendWeiboList(userId, 0, numberPerPage);
-		//´´½¨Òª·µ»ØµÄÍÆ¼öÎ¢²©ÁĞ±íwlist
+		//åˆ›å»ºè¦è¿”å›çš„æ¨èå¾®åšåˆ—è¡¨wlist
 		List<Weibo> wlist = new ArrayList<Weibo>();
 		
-		//Èç¹û·µ»ØµÄÍÆ¼öÁĞ±í²»Îª¿Õ£¬¸ù¾İÍÆ¼öÎ¢²©µÄidÈ¡µ½ÕæÕıµÄÎ¢²©£¬·ÅÈëwlist
+		//å¦‚æœè¿”å›çš„æ¨èåˆ—è¡¨ä¸ä¸ºç©ºï¼Œæ ¹æ®æ¨èå¾®åšçš„idå–åˆ°çœŸæ­£çš„å¾®åšï¼Œæ”¾å…¥wlist
 		if(wids != null){
 			for(String id : wids){
 				Weibo weibo = weiboDAO.getWeibo(id);
 				if(weibo != null){
 					wlist.add(weibo);
 				}
-				//É¾³ıÖ¸¶¨idµÄÎ¢²©£¬Îª±ÜÃâÖØ¸´ÍÆ¼ö
+				//åˆ é™¤æŒ‡å®šidçš„å¾®åšï¼Œä¸ºé¿å…é‡å¤æ¨è
 				recommendDAO.deleteRcommendWeiboById(id,userId);
 			}			
 		}
-		//·µ»ØÍÆ¼öÎ¢²©µÄlist,Èç¹ûÃ»ÓĞÄÚÈİÔòÊÇÒ»¸ö¿ÕÁĞ±í
+		//è¿”å›æ¨èå¾®åšçš„list,å¦‚æœæ²¡æœ‰å†…å®¹åˆ™æ˜¯ä¸€ä¸ªç©ºåˆ—è¡¨
 		return wlist;
 	}
 
